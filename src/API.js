@@ -4,7 +4,7 @@ import uuid from 'uuid';
 
 const API = {
   fetchPokemon(number) {
-    $.get(`http://pokeapi.co/api/v2/pokemon/${number}`, pokemon => {
+    $.get(`https://pokeapi.co/api/v2/pokemon/${number}`, pokemon => {
 
       let pokePackage = {
         name: pokemon.name,
