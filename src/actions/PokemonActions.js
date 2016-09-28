@@ -6,10 +6,20 @@ const PokemonActions = {
     API.fetchPokemon(number);
   },
 
+  fetchPokedex() {
+    API.fetchPokedex();
+  },
+
   deletePokemon(id) {
     AppDispatcher.dispatch({
       type: 'DELETE_POKEMON',
-      pay
+      payload: { id }
+    })
+  },
+
+  clearPokedex() {
+    AppDispatcher.dispatch({
+      type: 'CLEAR_POKEDEX',
     })
   }
 

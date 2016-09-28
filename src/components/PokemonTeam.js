@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import PokemonActions from '../actions/PokemonActions';
+
+import PokemonActions from '../actions/PokemonActions';
 import PokemonStore from '../stores/PokemonStore';
 
 export default class PokemonTeam extends Component {
@@ -29,9 +30,10 @@ export default class PokemonTeam extends Component {
 
   }
 
-  _delete() {
-    PokemonActions.deletePokemon();
+  _delete(id) {
+    PokemonActions.deletePokemon(id);
   }
+
 
   render() {
 
@@ -46,17 +48,14 @@ export default class PokemonTeam extends Component {
               <h4 className='text-center'>{pokemon.name}</h4>
             </div>
             <div className="col-xs-4">
-              <button onClick={this._delete}>X</button>
+              <button onClick={() => this._delete(pokemon.id)}>X</button>
             </div>
-            <div className="col-xs-12">
+            <div className="col-xs-12 picture">
               <img src={pokemon.img} alt="pokeman!"/>
             </div>
             <div className="col-xs-12">
               <div className="row">
                 Type: {pokemon.stats.type}
-              </div>
-              <div className="row">
-                Weight: {pokemon.stats.weight}
               </div>
               <div className="row">
                 HP: {pokemon.stats.hp}
@@ -66,6 +65,9 @@ export default class PokemonTeam extends Component {
               </div>
               <div className="row">
                 Defense: {pokemon.stats.defense}
+              </div>
+              <div className="row">
+                Weight: {pokemon.stats.weight}
               </div>
               <div className="row">
                 Speed: {pokemon.stats.speed}

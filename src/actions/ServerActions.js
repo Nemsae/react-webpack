@@ -7,7 +7,15 @@ const ServerActions = {
       type: 'RECEIVE_POKEMON',
       payload: { pokemonPackage }
     })
-  }
+  },
+
+  receivePokedex(myPokedex) {
+    AppDispatcher.dispatch({
+      type: 'RECEIVE_POKEDEX',
+      payload: { myPokedex }
+    })
+  },
+
 }
 
 export default ServerActions;

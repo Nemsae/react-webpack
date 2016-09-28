@@ -3,6 +3,7 @@ import PokemonActions from '../actions/PokemonActions';
 import PokemonStore from '../stores/PokemonStore';
 
 import PokemonTeam from './PokemonTeam';
+import Pokedex from './Pokedex';
 
 export default class Layout extends Component {
   constructor() {
@@ -10,7 +11,6 @@ export default class Layout extends Component {
 
     this.fetchPokemon = this.fetchPokemon.bind(this);
   }
-
 
   fetchPokemon() {
     let { pokemonNumber } = this.refs;
@@ -22,15 +22,17 @@ export default class Layout extends Component {
   render() {
 
     return (
-      // <div className='container'>
       <div>
-        <h1 className='text-center'>My Pokedex</h1>
+        <h1 className='text-center'>My PokeTeam</h1>
         <div className="row text-center">
-          <input type="number" ref='pokemonNumber'/>
+          <input type="number" ref='pokemonNumber' className='input' />
           <button onClick={this.fetchPokemon} className="btn btn-default">Get Pokemon</button>
         </div>
         <div>
           <PokemonTeam />
+        </div>
+        <div>
+          <Pokedex />
         </div>
       </div>
     )

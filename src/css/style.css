@@ -5,5 +5,26 @@
   border-radius: 15px;
   padding: 15px;
   margin-right: 10px;
+}
 
+.picture {
+  border: 2px solid black;
+  margin-right: 40px;
+  width: 140px;
+  background-color: #D7D7D7;
+}
+
+.input {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.pokedexButton {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.pokedex {
+  margin-top: 100px;
+  margin-bottom: 25px;
 }

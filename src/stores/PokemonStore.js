@@ -1,7 +1,9 @@
 import { EventEmitter }  from 'events';
 import AppDispatcher from '../AppDispatcher';
+import Storage from '../Storage';
 
-let _pokemon = [];
+let _pokemon = Storage.read('pokemon') || [];
+let _pokedex = undefined;
 
 class PokemonStore extends EventEmitter {
   constructor() {
@@ -10,14 +12,33 @@ class PokemonStore extends EventEmitter {
     AppDispatcher.register(action => {
       switch(action.type) {
         case 'RECEIVE_POKEMON':
-        let { pokemonPackage } = action.payload;
+          let { pokemonPackage } = action.payload;
           _pokemon.push(pokemonPackage);
-          (console.log('_pokemon: ',_pokemon))
           this.emit('CHANGE');
           break;
 
+        case 'DELETE_POKEMON':
+          let { id } = action.payload;
+          _pokemon = filter(id);
+          this.emit('CHANGE');
+          break;
+
+        case 'RECEIVE_POKEDEX':
+          let { myPokedex } = action.payload;
+          _pokedex = myPokedex.pokemon_entries;
+          this.emit('CHANGE');
+          break;
+
+        case 'CLEAR_POKEDEX':
+          _pokedex = undefined;
+          this.emit('CHANGE');
+          break;
 
       }
+    });
+
+    this.on('CHANGE', () => {
+      Storage.write('pokemon', _pokemon);
     })
   }
 
@@ -33,6 +54,22 @@ class PokemonStore extends EventEmitter {
     return _pokemon;
   }
 
+  getPokedex() {
+    return _pokedex;
+  }
+
 }
 
-export default new PokemonStore();
+let Store = new PokemonStore();
+export default Store;
+
+function filter(currId) {
+  let updatedPokemon = _pokemon.filter(pokemon => {
+    if (pokemon.id == currId) {
+      return;
+    } else {
+      return pokemon;
+    }
+  })
+  return updatedPokemon;
+}

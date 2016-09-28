@@ -22,6 +22,12 @@ const API = {
 
       ServerActions.receivePokemon(pokePackage);
     });
+  },
+
+  fetchPokedex() {
+    $.get(`https://pokeapi.co/api/v2/pokedex/1/`, pokedex => {
+      ServerActions.receivePokedex(pokedex);
+    })
   }
 }
 
